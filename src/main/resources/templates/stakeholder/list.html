@@ -11,7 +11,8 @@
     <div th:each="stakeholder: ${stakeholders} ">
       <div>
         <section>
-          <a th:text="'HP-' + ${stakeholder.id}">0815</a> <b th:text ="${stakeholder.name}">Foo</b></section>
+          <a th:text="'HP-' + ${stakeholder.id}"
+             th:href="${stakeholder.id}" href="0">0815</a> <b th:text ="${stakeholder.name}">Foo</b></section>
         <section th:text="${stakeholder.description}">Foo Description</section> 
       </div>
       <br>
