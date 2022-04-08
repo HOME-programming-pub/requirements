@@ -12,15 +12,15 @@ public class Requirement {
 		this.id = id;
 	}
 	
-	public String getName() {
-		return name;
-	}
+	public String getName() { return name; }	
+	public void setName(String name) { this.name = name; }
 
-	public String getDescription() {
-		return description;
-	}
+	public String getDescription() { return description; }
+	public void setDescription(String desc) { this.description = desc; }
 
 	public int getId() {
 		return id;
 	}
+
+
 }

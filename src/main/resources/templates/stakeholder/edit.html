@@ -1,0 +1,57 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link th:href="@{/resources/css/style.css}" rel="stylesheet" href="../static/resources/css/style.css"
+		type="text/css" />
+	<title>Modify Stakeholder</title>
+</head>
+
+<body>
+	<h1 th:text="'Modify ' + ${stakeholder.name}">Foo</h1>
+	<h2>General data</h2>
+	<form th:action="@{/stakeholder/{id}(id = ${stakeholder.id}, _method=put)}" action="/stakeholder/-1?_method=put" method="post">
+		<label for="stakeholder_name">Name:
+			<input class="simple" type="text" name="stakeholder_name" th:value="${stakeholder.name}" value="Foo">
+		</label>
+		<br />
+		<label>Description:
+			<textarea class="simple" type="text" name="stakeholder_description"
+				th:text="${stakeholder.description}">Bar</textarea>
+			<br />
+			<input type="submit" name="submit" value="Update" />
+		</label>
+	</form>
+	
+	<h2>Links to requirements</h2>
+	<form th:action="@{/stakeholder/{id}/requirement(id = ${stakeholder.id})}" action="/stakeholder/-1/requirement"
+		method="post">
+		<label for="requirement_id">Select requirement to link:
+			<select  name="requirement_id">
+				<option th:each="requirement: ${linkable_reqs}" 
+						th:value="${requirement.id}" value="-1"
+						th:text="${requirement.id} + ' - ' + ${requirement.name}">Foo</option>
+			</select>
+		</label>
+		<br />
+		<input th:unless="${linkable_reqs.isEmpty}" type="submit" name="submit" value="Create Link" />
+	</form>
+	
+	<h2>New requirements</h2>
+	<form th:action="@{/stakeholder/{id}/requirement(id = ${stakeholder.id})}" action="/stakeholder/-1/requirement" method="post">
+		<label for="requirement_name">Requirement:
+			<input class="simple" type="text" name="requirement_name" placeholder="Name" />
+		</label>
+		<input type="submit" name="submit" value="Add New">
+	</form>
+	
+	<div th:unless="${#lists.isEmpty(messages)}">
+	Messages:
+	<ul>
+		<li th:each="message: ${messages}" th:text="${message}">Bar</li>
+	</ul>
+	</div>
+</body>
+
+</htsml>
