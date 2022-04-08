@@ -20,7 +20,8 @@
 		<p>This stakeholder is linked to the following requirements:</p>
 		<ul>
 			<li th:each="requirement: ${reqs}">
-				<a th:text="${requirement.name}" href="/requirement/{{id}}">Foo</a>
+				<a th:text="${requirement.name}" 
+				   th:href="@{/requirement/{id}(id=${requirement.id})}" href="/foo/bar">Foo</a>
 			</li>
 		</ul>
 	</div>

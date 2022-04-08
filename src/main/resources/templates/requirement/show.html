@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link th:href="@{/resources/css/style.css}" rel="stylesheet" href="../static/resources/css/style.css"
+		type="text/css" />
+	<title>Requirement Details</title>
+</head>
+
+<body>
+	<h1>
+		<span th:text="'HP-' + ${requirement.id} + ' ' + ${requirement.name}">Foo</span>
+		<a th:href="@{/requirement/{id}/edit(id=${requirement.id})}" href="/foo/bar">edit</a>
+	</h1>
+	<h2>Description</h2>
+	<p th:text="${requirement.description}">Foo</p>
+	<h2>Linked Stakeholders</h2>
+	<p>The requirement is linked with the following stakeholders:</p>
+	<ul th:unless="${stakeholders.isEmpty}">
+		<li th:each="stakeholder: ${stakeholders}">
+			<a th:href="@{/stakeholder/{id}(id = ${stakeholder.id})}" href="/foo/bar"
+				th:text="'HP-' + ${stakeholder.id}">HP-0815</a>
+			<span th:text="${stakeholder.name}">Bar</span>
+		</li>
+	<ul>
+
+</body>
+
+</html>

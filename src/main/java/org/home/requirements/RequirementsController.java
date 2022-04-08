@@ -51,4 +51,16 @@ public class RequirementsController {
 		return "stakeholder/show";
 	}
 	
+	@GetMapping(path = "/requirement/{id}")
+	public String viewRequirement(@PathVariable Long id, Model model) {
+		var requirement = requirements.stream().filter(x -> x.getId() == id).findFirst().get();
+		model.addAttribute("requirement", requirement);
+		var stakeholders = links.stream()
+							.filter(pair -> pair.getSecond() == requirement)
+							.map(pair -> pair.getFirst());
+		model.addAttribute("stakeholders", stakeholders.toList());
+		model.addAttribute("messages", new ArrayList<String>());
+		return "requirement/show";
+	}
+	
 }
