@@ -1,0 +1,25 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+  	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  	<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+  	<title>Highway Pilot - Stakeholders</title></head>
+  <body>
+    <h1>Stakeholder</h1>
+    <p>Click on a stakeholder to see the corresponding requirements.</p>
+    <div th:each="stakeholder: ${stakeholders} ">
+      <div>
+        <section>
+          <a th:text="'HP-' + ${stakeholder.id}">0815</a> <b th:text ="${stakeholder.name}">Foo</b></section>
+        <section th:text="${stakeholder.description}">Foo Description</section> 
+      </div>
+      <br>
+    </div>
+    <div>
+      <form action="/stakeholder" method="post">
+        <input type="submit" name="submit" value="New">
+      </form>
+    </div>
+  </body>
+</html>
