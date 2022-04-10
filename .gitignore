@@ -34,4 +34,6 @@ build/
 
 ### Sonstige ###
 gensvg.exe
+*.db
+
 
