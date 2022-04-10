@@ -1,14 +1,30 @@
 package org.home.requirements.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity
 public class Stakeholder {
 	private String name;
 	private String description;
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id private int id;
 	
-	public Stakeholder(String name, String description, int id) {
+	
+    @ManyToMany
+    private Set<Requirement> requirements = new HashSet<Requirement>();
+	
+    public Stakeholder() {}
+    
+	public Stakeholder(String name, String description) {
 		this.name = name;
 		this.description = description;
-		this.id = id;
 	}
 	
 	public String getName() { return name; }
@@ -17,7 +33,15 @@ public class Stakeholder {
 	public String getDescription() { return description; }
 	public void setDescription(String description) { this.description = description; }
 
-	public int getId() {
-		return id;
+	public int getId() { return id; }
+	public void setId(int id) { this.id = id; };
+	
+	public Set<Requirement> getRequirements() {
+		return this.requirements;
 	}
+	
+    public void addRequirement(Requirement req) {
+    	this.addRequirement(req);
+    	req.getStakeholders().add(this);
+    }
 }

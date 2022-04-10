@@ -1,6 +1,9 @@
 package org.home.requirements;
 
-import org.home.requirements.model.RequirementsModel;
+import org.home.requirements.model.Requirement;
+import org.home.requirements.model.RequirementRepository;
+import org.home.requirements.model.StakeholderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,19 +13,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class StakeholderRequirementController {
 
-	private RequirementsModel data = RequirementsModel.getInstance();	
+	@Autowired private StakeholderRepository data;	
+	@Autowired private RequirementRepository reqData;
 	
 	@PostMapping(path = "/stakeholder/{id}/requirement")
 	public String handleLinkRequirement(
-			@PathVariable Long id, 
+			@PathVariable Integer id, 
 			@RequestParam(required = false) String requirement_name, 
-			@RequestParam(required = false) Long requirement_id, Model model) {
-		var stakeholder = data.getStakeholders().stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+			@RequestParam(required = false) Integer requirement_id, Model model) {
+		var stakeholder = data.findById(id).get();
 		if(stakeholder != null) {
-			if(requirement_name != null)
-				data.createRequirement(requirement_name);
-			if(requirement_id != null)
-				data.createLink(requirement_id, stakeholder);
+			Requirement requirement = null;
+			if(requirement_name != null) {
+				requirement = new Requirement(requirement_name, null);
+				reqData.save(requirement);
+			}
+			else if(requirement_id != null) {
+				requirement = reqData.findById(requirement_id).get();
+			}
+			stakeholder.addRequirement(requirement);
 		}
 		return "redirect:/stakeholder/" + id;
 	}
