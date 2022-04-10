@@ -23,14 +23,19 @@ public class RequirementsApplication {
 	CommandLineRunner init(StakeholderRepository data, RequirementRepository reqData) {
 
 		return args -> {
-					data.save(new Stakeholder("Driver", "The driver of the Fantasy car."));
-					data.save(new Stakeholder("Owner", "The owner/buyer of the Fantasy car."));
-					data.save(new Stakeholder("Mechanic", "Mechanical engineer who maintains a car."));
-					data.save(new Stakeholder("Upper management", "The management of our business."));
-					data.save(new Stakeholder("Legal department", "The legal department of Fantasy Automotive."));
-					
-					reqData.save(new Requirement("Operability at highway speeds.", "The system shall be operable at normal highway speeds."));
-					reqData.save(new Requirement("Conformance to ISO 26262.", "The driving function shall conform to the safety rules in ISO 26262."));
+			var stakeholder = new Stakeholder("Driver", "The driver of the Fantasy car.");
+			data.save(stakeholder);
+			data.save(new Stakeholder("Owner", "The owner/buyer of the Fantasy car."));
+			data.save(new Stakeholder("Mechanic", "Mechanical engineer who maintains a car."));
+			data.save(new Stakeholder("Upper management", "The management of our business."));
+			data.save(new Stakeholder("Legal department", "The legal department of Fantasy Automotive."));
+			
+			var requirement = new Requirement("Operability at highway speeds.", "The system shall be operable at normal highway speeds.");
+			reqData.save(requirement);
+			reqData.save(new Requirement("Conformance to ISO 26262.", "The driving function shall conform to the safety rules in ISO 26262."));
+			
+			stakeholder.addRequirement(requirement);
+			data.save(stakeholder);
 		};
 	}
 

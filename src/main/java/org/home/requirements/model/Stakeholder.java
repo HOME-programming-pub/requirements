@@ -41,7 +41,7 @@ public class Stakeholder {
 	}
 	
     public void addRequirement(Requirement req) {
-    	this.addRequirement(req);
+    	this.requirements.add(req);
     	req.getStakeholders().add(this);
     }
 }

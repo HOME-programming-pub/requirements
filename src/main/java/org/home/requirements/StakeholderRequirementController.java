@@ -32,6 +32,7 @@ public class StakeholderRequirementController {
 				requirement = reqData.findById(requirement_id).get();
 			}
 			stakeholder.addRequirement(requirement);
+			data.save(stakeholder);
 		}
 		return "redirect:/stakeholder/" + id;
 	}
