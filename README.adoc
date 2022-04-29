@@ -1,0 +1,7 @@
+= Simple Requirements Management
+
+This is a very simple requirements management application based on Spring Boot. It has been created for the purpose of teaching programming web applications using Spring MVC at https://www.hs-merseburg.de/[Merseburg University of Applied Sciences], Germany.
+
+
+image::./src/main/resources/static/resources/images/view.requirement.edit.png[title="Screenshot of the Application"]
+
