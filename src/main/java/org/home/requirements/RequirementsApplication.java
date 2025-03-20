@@ -23,6 +23,9 @@ public class RequirementsApplication {
 	CommandLineRunner init(StakeholderRepository data, RequirementRepository reqData) {
 
 		return args -> {
+			if(data.count() > 0) {
+				return; // already initialized
+			}
 			var stakeholder = new Stakeholder("Driver", "The driver of the Fantasy car.");
 			data.save(stakeholder);
 			data.save(new Stakeholder("Owner", "The owner/buyer of the Fantasy car."));

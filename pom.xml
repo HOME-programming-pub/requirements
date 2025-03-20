@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.0-M4</version>
+		<version>3.4.3</version>
 		<relativePath />
 	</parent>
 	<groupId>org.home</groupId>
@@ -14,7 +14,7 @@
 	<name>requirements</name>
 	<description>A simple requirements management Bootlication</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>21</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
